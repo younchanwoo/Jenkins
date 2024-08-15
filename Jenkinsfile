@@ -33,9 +33,7 @@ pipeline {
                     fi
                     """
                     // 컨테이너를 재시작할 수 있도록 설정하여 실행
-                    sh """
-                    podman run -d --restart unless-stopped -p 8080:8080 --name ${CONTAINER_NAME} ${DOCKER_IMAGE}
-                    """
+                    sh 'podman run -d --restart unless-stopped -p 8080:8080 --name ${CONTAINER_NAME} ${DOCKER_IMAGE}'
                 }
             }
         }
@@ -44,6 +42,8 @@ pipeline {
     post {
         always {
             echo 'Pipeline execution completed.'
+            sh 'podman ps -a'
+            sh 'podman images'
         }
         success {
             echo 'Deployment successful!'
