@@ -9,14 +9,14 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://your-repo-url.git'
+                git branch: 'main', url: 'https://github.com/younchanwoo/Jenkins.git'
             }
         }
 
         stage('Build Podman Image') {
             steps {
                 script {
-                    sh 'podman build -t ${DOCKER_IMAGE} .'
+                    sh 'podman build --no-cache -t ${DOCKER_IMAGE} .'
                 }
             }
         }
@@ -24,14 +24,12 @@ pipeline {
         stage('Deploy Container') {
             steps {
                 script {
-                    // 기존 컨테이너가 있으면 종료 및 삭제
                     sh """
                     if [ \$(podman ps -aq -f name=\${CONTAINER_NAME}) ]; then
                         podman stop \${CONTAINER_NAME}
                         podman rm \${CONTAINER_NAME}
                     fi
                     """
-                    // 새로운 컨테이너 실행
                     sh 'podman run -d -p 8080:8080 --name ${CONTAINER_NAME} ${DOCKER_IMAGE}'
                 }
             }
