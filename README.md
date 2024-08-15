@@ -163,9 +163,9 @@ Jenkins가 설치된 후, 웹 브라우저에서 http://<YOUR_SERVER_IP>:8080으
 
 
 # 2. Jenkins CI/CD 파이프라인 설정
-이제 Jenkins를 사용하여 CI/CD 파이프라인을 설정합니다.
+이제 `Jenkins`를 사용하여 CI/CD 파이프라인을 설정합니다.
 
-## 2.1. Dockerfile 및 Jenkinsfile 준비
+## 2.1. `Dockerfile` 및 `Jenkinsfile` 준비
 Dockerfile
 
 다음은 Apache Tomcat을 포함하는 Dockerfile의 예입니다. 이 파일은 `Dockerfile`로 저장됩니다.
