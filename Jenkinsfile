@@ -41,8 +41,7 @@ pipeline {
 
     post {
         always {
-            echo 'Cleaning up Podman containers...'
-            sh 'podman system prune -f'
+            echo 'Pipeline execution completed.'
         }
         success {
             echo 'Deployment successful!'
