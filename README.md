@@ -1,11 +1,35 @@
 # Jenkins 설치 가이드 for Fedora 39 with Java 17
 
-이 문서는 Fedora 39에서 Java 17을 사용하여 Jenkins를 설치하는 간단한 가이드입니다.
+이 문서는 Fedora 39에서 Java 17을 사용하여 Jenkins를 설치하고, Git과 Jenkins를 활용하여 CI/CD 파이프라인을 설정하는 간단한 가이드입니다.
 
 # 사전 요구 사항
 * Jenkins 설치 및 실행
 * Docker & podman 설치
 * Git 저장소 접근 권한
+* Git 저장소에 CI/CD 파이프라인을 위한 프로젝트 및 Jenkinsfile 저장
+
+# 파일 구조
+```
+root@MW:/jenkins# ll
+total 28
+-rw-r--r--. 1 root root  300 Aug 15 10:45 Dockerfile
+-rwxr-xr-x. 1 root root 1421 Aug 15 10:09 install.sh
+-rw-r--r--. 1 root root 1679 Aug 15 12:27 Jenkinsfile
+-rw-r--r--. 1 root root 1896 Aug 15 10:24 README.md
+-rwxr-xr-x. 1 root root  850 Aug 15 10:05 remove.sh
+-rw-r--r--. 1 root root 4611 Aug  3 11:31 SessionCookieApp-1.0-SNAPSHOT.war
+root@MW:/jenkins# 
+root@MW:/jenkins# tree .
+.
+├── Dockerfile
+├── install.sh
+├── Jenkinsfile
+├── README.md
+├── remove.sh
+└── SessionCookieApp-1.0-SNAPSHOT.war
+
+1 directory, 6 files
+```
 
 # 1. Jenkins 설치
 ## 1.1. 스크립트 준비
@@ -242,3 +266,5 @@ REPOSITORY                  TAG         IMAGE ID      CREATED             SIZE
 localhost/sessioncookieapp  latest      59c666fdae7d  About a minute ago  475 MB
 docker.io/library/tomcat    latest      087c6d900ed4  8 days ago          475 MB
 ```
+# 3. 참고 자료
+* Jenkins 공식 문서
