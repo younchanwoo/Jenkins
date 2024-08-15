@@ -16,6 +16,7 @@ pipeline {
         stage('Build Podman Image') {
             steps {
                 script {
+                    // 이 단계에서 Dockerfile을 사용하여 이미지를 빌드합니다.
                     sh 'podman build --no-cache -t ${DOCKER_IMAGE} .'
                 }
             }
@@ -30,10 +31,8 @@ pipeline {
                         podman rm \${CONTAINER_NAME}
                     fi
                     """
-                    sh 'podman run -d -p 8080:8080 --name ${CONTAINER_NAME} ${DOCKER_IMAGE}'
-                    
-                    // 컨테이너가 정상적으로 실행되고 있는지 확인
-                    sh 'podman ps'
+                    // 컨테이너를 재시작할 수 있도록 설정하여 실행
+                    sh 'podman run -d --restart unless-stopped -p 8080:8080 --name ${CONTAINER_NAME} ${DOCKER_IMAGE}'
                 }
             }
         }
@@ -42,8 +41,6 @@ pipeline {
     post {
         always {
             echo 'Pipeline execution completed.'
-            // 컨테이너 로그 출력
-            sh 'podman logs ${CONTAINER_NAME} || echo "No logs available"'
         }
         success {
             echo 'Deployment successful!'
