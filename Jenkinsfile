@@ -25,6 +25,7 @@ pipeline {
         stage('Deploy Container') {
             steps {
                 script {
+                    // 기존 컨테이너가 있으면 종료 및 삭제
                     sh """
                     if [ \$(podman ps -aq -f name=\${CONTAINER_NAME}) ]; then
                         podman stop \${CONTAINER_NAME}
@@ -32,7 +33,9 @@ pipeline {
                     fi
                     """
                     // 컨테이너를 재시작할 수 있도록 설정하여 실행
-                    sh 'podman run -d --restart unless-stopped -p 8080:8080 --name ${CONTAINER_NAME} ${DOCKER_IMAGE}'
+                    sh """
+                    podman run -d --restart unless-stopped -p 8080:8080 --name ${CONTAINER_NAME} ${DOCKER_IMAGE}
+                    """
                 }
             }
         }
