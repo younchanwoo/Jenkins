@@ -266,5 +266,46 @@ REPOSITORY                  TAG         IMAGE ID      CREATED             SIZE
 localhost/sessioncookieapp  latest      59c666fdae7d  About a minute ago  475 MB
 docker.io/library/tomcat    latest      087c6d900ed4  8 days ago          475 MB
 ```
-# 3. 참고 자료
-* Jenkins 공식 문서
+# 3. podman 문제 해결
+문제: Podman 컨테이너가 podman ps -a 명령어로 표시되지 않음
+
+이 문제는 Podman이 rootless 모드로 실행되고 있을 때 발생할 수 있습니다. rootless 모드에서는 사용자가 직접적으로 권한을 관리하며, root 권한 없이도 컨테이너를 실행할 수 있습니다. 하지만 rootless 모드가 비활성화된 경우, root 권한이 필요할 수 있습니다.
+
+해결 방법
+# 3.1. Podman의 rootless 모드 확인
+```
+]# podman info --debug | grep 'rootless'
+```
+# 3.2. Podman rootless 모드 비활성화
+Podman이 rootless 모드에서 실행되고 있다면, root 권한으로 Podman을 실행하여 문제가 해결되는지 확인합니다. 다음 명령어를 사용하여 root 권한으로 Podman을 실행할 수 있습니다:
+```
+]# podman ps -a
+```
+# 3.3. Podman 설정 확인
+Podman이 rootless 모드가 아닌, root 모드에서 실행되도록 설정하려면, Podman을 root 권한으로 설정하고 사용합니다. 기본적으로 Podman은 rootless 모드로 작동하지만, 시스템에 따라 설정이 다를 수 있습니다. Podman의 설정 파일을 확인하고 필요에 따라 조정합니다.
+
+# 3.4. Podman 서비스 재시작
+```
+]# systemctl restart podman
+```
+
+# 3.5. Rootless 모드 해제 시 발생할 수 있는 문제점
+```
+1. 보안 리스크
+    권한 상승: root 권한으로 컨테이너가 시스템 전체에 영향을 미칠 수 있어 보안 취약점이 생길 수 있습니다.
+    잠재적 보안 취약점: root 권한을 가진 컨테이너는 시스템의 중요한 부분에 접근할 수 있어 악성 코드나 취약점이 시스템에 영향을 미칠 수 있습니다.
+
+2. 관리 및 유지보수의 복잡성
+
+    권한 관리: root 모드에서는 여러 사용자가 동일 시스템에서 작업할 때 권한 관리가 복잡해질 수 있습니다.
+    시스템 자원: 시스템 자원에 대한 제어가 증가하므로, 자원 관리가 어려워질 수 있습니다.
+
+3. 컨테이너와 호스트 간의 충돌
+
+    파일 시스템 접근: root 모드에서는 파일 시스템 접근 제한이 없어져 파일 충돌이나 손상이 발생할 수 있습니다.
+    포트 충돌: 여러 컨테이너가 동일 포트를 사용하려고 할 경우 포트 충돌이 발생할 수 있습니다.
+```
+
+# 4. 참고 자료
+* Jenkins 공식 문서: Jenkins의 공식 문서에서는 Jenkins 설치 및 설정에 관한 자세한 정보를 제공합니다.
+* RedHat 공식 문서: RedHat의 Rootless Containers에서는 rootless 모드와 관련된 보안 및 관리 측면에 대한 정보를 제공합니다.
