@@ -307,4 +307,3 @@ Podman이 rootless 모드가 아닌, root 모드에서 실행되도록 설정하
 
 # 4. 참고 자료
 * Jenkins 공식 문서: Jenkins의 공식 문서에서는 Jenkins 설치 및 설정에 관한 자세한 정보를 제공합니다.
-* RedHat 공식 문서: RedHat의 Rootless Containers에서는 rootless 모드와 관련된 보안 및 관리 측면에 대한 정보를 제공합니다.
