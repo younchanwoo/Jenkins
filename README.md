@@ -10,7 +10,7 @@
 
 # 파일 구조
 ```
-root@MW:/jenkins# ll
+]# ll
 total 28
 -rw-r--r--. 1 root root  300 Aug 15 10:45 Dockerfile
 -rwxr-xr-x. 1 root root 1421 Aug 15 10:09 install.sh
@@ -18,8 +18,8 @@ total 28
 -rw-r--r--. 1 root root 1896 Aug 15 10:24 README.md
 -rwxr-xr-x. 1 root root  850 Aug 15 10:05 remove.sh
 -rw-r--r--. 1 root root 4611 Aug  3 11:31 SessionCookieApp-1.0-SNAPSHOT.war
-root@MW:/jenkins# 
-root@MW:/jenkins# tree .
+
+]# tree .
 .
 ├── Dockerfile
 ├── install.sh
@@ -160,7 +160,6 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
 ## 1.3. Jenkins 웹 인터페이스 접근
 Jenkins가 설치된 후, 웹 브라우저에서 http://<YOUR_SERVER_IP>:8080으로 이동합니다. 초기 비밀번호는 스크립트가 전부 실행이 되면 위와 같이 패스워드가 표시가 됩니다.
-
 
 
 # 2. Jenkins CI/CD 파이프라인 설정
