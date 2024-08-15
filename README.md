@@ -258,10 +258,10 @@ pipeline {
 
 #### 3. Pipeline 정상 기동 확인
 ```
-root@MW:/jenkins# podman ps -a
+#] podman ps -a
 CONTAINER ID  IMAGE                              COMMAND          CREATED             STATUS             PORTS                   NAMES
 956ad8a38630  localhost/sessioncookieapp:latest  catalina.sh run  About a minute ago  Up About a minute  0.0.0.0:8080->8080/tcp  tomcat_sessioncookieapp
-root@MW:/jenkins# podman images
+#] podman images
 REPOSITORY                  TAG         IMAGE ID      CREATED             SIZE
 localhost/sessioncookieapp  latest      59c666fdae7d  About a minute ago  475 MB
 docker.io/library/tomcat    latest      087c6d900ed4  8 days ago          475 MB
